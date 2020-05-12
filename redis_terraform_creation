@@ -1,0 +1,177 @@
+NS-000498:redis josemoreira$ more redis.tf 
+variable "id_subnet" {}
+variable "id_security_groups" { type="list" }
+
+provider "aws" {
+  shared_credentials_file = "~/.aws/kafka.poc.creds"
+  region     = "us-west-1"
+}
+
+resource "aws_network_interface" "redis01" {
+  subnet_id = "${var.id_subnet}"
+  private_ips = ["10.173.2.126"]
+  security_groups = "${var.id_security_groups}"
+  tags {
+    Name = "primary_network_interface"
+  }
+}
+
+resource "aws_instance" "redis01" {
+  ami           = "ami-0fd67618545fdfca7"
+  instance_type = "t2.medium"
+  tags {
+    Name = "redis01"
+    Brand = "Kafka POC"
+  }
+  key_name   = "Kafka-Mirror"
+  network_interface {
+     network_interface_id = "${aws_network_interface.redis01.id}"
+     device_index = 0 
+  }
+  root_block_device {
+    volume_type = "gp2"
+    volume_size = "500"
+  }
+}
+
+resource "aws_network_interface" "redis02" {
+  subnet_id = "${var.id_subnet}"
+  private_ips = ["10.173.2.127"]
+  security_groups = "${var.id_security_groups}"
+  tags {
+    Name = "primary_network_interface"
+  }
+}
+
+resource "aws_instance" "redis02" {
+  ami           = "ami-0fd67618545fdfca7"
+  instance_type = "t2.medium"
+  tags {
+    Name = "redis02"
+    Brand = "Kafka POC"
+  }
+  key_name   = "Kafka-Mirror"
+  network_interface {
+     network_interface_id = "${aws_network_interface.redis02.id}"
+     device_index = 0 
+  }
+  root_block_device {
+    volume_type = "gp2"
+    volume_size = "500"
+  }
+}
+
+resource "aws_network_interface" "redis03" {
+  subnet_id = "${var.id_subnet}"
+  private_ips = ["10.173.2.128"]
+  security_groups = "${var.id_security_groups}"
+  tags {
+    Name = "primary_network_interface"
+  }
+}
+
+resource "aws_instance" "redis03" {
+  ami           = "ami-0fd67618545fdfca7"
+  instance_type = "t2.medium"
+  tags {
+    Name = "redis03"
+    Brand = "Kafka POC"
+  }
+  key_name   = "Kafka-Mirror"
+  network_interface {
+     network_interface_id = "${aws_network_interface.redis03.id}"
+     device_index = 0 
+  }
+  root_block_device {
+    volume_type = "gp2"
+    volume_size = "500"
+  }
+}
+
+resource "aws_network_interface" "redis04" {
+  subnet_id = "${var.id_subnet}"
+  private_ips = ["10.173.2.129"]
+  security_groups = "${var.id_security_groups}"
+  tags {
+    Name = "primary_network_interface"
+  }
+}
+
+resource "aws_instance" "redis04" {
+  ami           = "ami-0fd67618545fdfca7"
+  instance_type = "t2.medium"
+  tags {
+    Name = "redis04"
+    Brand = "Kafka POC"
+  }
+  key_name   = "Kafka-Mirror"
+  network_interface {
+     network_interface_id = "${aws_network_interface.redis04.id}"
+     device_index = 0 
+  }
+  root_block_device {
+    volume_type = "gp2"
+    volume_size = "500"
+  }
+}
+
+resource "aws_network_interface" "redis05" {
+  subnet_id = "${var.id_subnet}"
+  private_ips = ["10.173.2.130"]
+  security_groups = "${var.id_security_groups}"
+  tags {
+    Name = "primary_network_interface"
+  }
+}
+
+resource "aws_instance" "redis05" {
+  ami           = "ami-0fd67618545fdfca7"
+  instance_type = "t2.medium"
+  tags {
+    Name = "redis05"
+    Brand = "Kafka POC"
+  }
+  key_name   = "Kafka-Mirror"
+  network_interface {
+     network_interface_id = "${aws_network_interface.redis05.id}"
+     device_index = 0
+  }
+  root_block_device {
+    volume_type = "gp2"
+    volume_size = "500"
+  }
+}
+resource "aws_network_interface" "redis06" {
+  subnet_id = "${var.id_subnet}"
+  private_ips = ["10.173.2.131"]
+  security_groups = "${var.id_security_groups}"
+  tags {
+    Name = "primary_network_interface"
+  }
+}
+
+resource "aws_instance" "redis06" {
+  ami           = "ami-0fd67618545fdfca7"
+  instance_type = "t2.medium"
+  tags {
+    Name = "redis06"
+    Brand = "Kafka POC"
+  }
+  key_name   = "Kafka-Mirror"
+  network_interface {
+     network_interface_id = "${aws_network_interface.redis06.id}"
+     device_index = 0
+  }
+  root_block_device {
+    volume_type = "gp2"
+    volume_size = "500"
+  }
+}
+
+
+
+
+
+
+
+
